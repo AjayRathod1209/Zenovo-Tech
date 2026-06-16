@@ -1,4 +1,5 @@
-  import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -7,12 +8,69 @@ import {
 } from "react-icons/fa";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    business: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      setSuccess("");
+
+      const response = await fetch(
+        "http://localhost:5000/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSuccess("✅ Message Sent Successfully!");
+
+        setFormData({
+          name: "",
+          email: "",
+          business: "",
+          message: "",
+        });
+      } else {
+        setSuccess("❌ Something went wrong.");
+      }
+    } catch (error) {
+      console.log(error);
+      setSuccess("❌ Server Error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
       className="relative py-24 bg-black text-white overflow-hidden"
     >
-      {/* Background Glow */}
+      {/* Glow */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 blur-[180px] rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[180px] rounded-full"></div>
 
@@ -55,14 +113,11 @@ function Contact() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-
             <div className="bg-white/5 border border-cyan-500/20 rounded-3xl p-6 flex items-center gap-5">
               <FaWhatsapp className="text-3xl text-green-400" />
               <div>
                 <h3 className="font-bold text-xl">WhatsApp</h3>
-                <p className="text-gray-400">
-                  +91 XXXXX XXXXX
-                </p>
+                <p className="text-gray-400">+91 XXXXX XXXXX</p>
               </div>
             </div>
 
@@ -80,9 +135,7 @@ function Contact() {
               <FaPhoneAlt className="text-3xl text-cyan-400" />
               <div>
                 <h3 className="font-bold text-xl">Phone</h3>
-                <p className="text-gray-400">
-                  +91 XXXXX XXXXX
-                </p>
+                <p className="text-gray-400">+91 XXXXX XXXXX</p>
               </div>
             </div>
 
@@ -90,15 +143,12 @@ function Contact() {
               <FaMapMarkerAlt className="text-3xl text-cyan-400" />
               <div>
                 <h3 className="font-bold text-xl">Location</h3>
-                <p className="text-gray-400">
-                  Maharashtra, India
-                </p>
+                <p className="text-gray-400">Maharashtra, India</p>
               </div>
             </div>
-
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,44 +156,65 @@ function Contact() {
             viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-3xl p-8"
           >
-            <form className="space-y-6">
+            <form onSubmit={submitHandler} className="space-y-6">
 
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Your Name"
+                required
                 className="w-full bg-black/50 border border-cyan-500/20 rounded-xl px-5 py-4 outline-none focus:border-cyan-400"
               />
 
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Your Email"
+                required
                 className="w-full bg-black/50 border border-cyan-500/20 rounded-xl px-5 py-4 outline-none focus:border-cyan-400"
               />
 
               <input
                 type="text"
+                name="business"
+                value={formData.business}
+                onChange={handleChange}
                 placeholder="Your Business"
                 className="w-full bg-black/50 border border-cyan-500/20 rounded-xl px-5 py-4 outline-none focus:border-cyan-400"
               />
 
               <textarea
                 rows="5"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Tell us about your project..."
+                required
                 className="w-full bg-black/50 border border-cyan-500/20 rounded-xl px-5 py-4 outline-none resize-none focus:border-cyan-400"
               ></textarea>
 
+              {success && (
+                <p className="text-center text-cyan-400 font-medium">
+                  {success}
+                </p>
+              )}
+
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full bg-cyan-500 text-black font-bold py-4 rounded-xl hover:bg-cyan-400 transition duration-300"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
 
             </form>
           </motion.div>
 
         </div>
-
       </div>
     </section>
   );
