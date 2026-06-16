@@ -33,15 +33,15 @@ function Contact() {
       setSuccess("");
 
       const response = await fetch(
-        "http://localhost:5000/api/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+  "https://zenovo-tech-2.onrender.com/api/contact",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  }
+);
 
       const data = await response.json();
 
