@@ -12,7 +12,7 @@ function Footer() {
       {/* Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-cyan-500/10 blur-[180px] rounded-full"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 pb-32 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 relative z-10">
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
 
