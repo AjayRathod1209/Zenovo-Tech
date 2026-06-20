@@ -4,28 +4,28 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 function Portfolio() {
   const projects = [
     {
-      title: "Elite Fitness Gym",
-      category: "Gym Website",
-      image: "/gym-project.jpg",
-      link: "https://example.com",
+      title: "DentCare Dental Clinic",
+      category: "Dental Website",
+      image: "/dentcare-project.jpg",
+      link: "https://dentcare-mu.vercel.app/",
       description:
-        "Modern fitness website designed for memberships, classes and lead generation.",
+        "Modern dental clinic website featuring appointment booking, service showcase, testimonials, pricing section and responsive design.",
     },
     {
-      title: "Prime Properties",
-      category: "Real Estate Website",
-      image: "/realestate-project.jpg",
-      link: "https://example.com",
+      title: "DentCare Dental Clinic",
+      category: "Dental Website",
+      image: "/dentcare-project.jpg",
+      link: "https://dentcare-mu.vercel.app/", // Baad me change kar dena
       description:
-        "Professional real estate platform built to showcase properties and generate inquiries.",
+        "Modern dental clinic website featuring appointment booking, service showcase, testimonials, pricing section and responsive design.",
     },
     {
-      title: "AI Business Hub",
-      category: "Business Website",
-      image: "/ai-project.jpg",
-      link: "https://example.com",
+      title: "DentCare Dental Clinic",
+      category: "Dental Website",
+      image: "/dentcare-project.jpg",
+      link: "https://dentcare-mu.vercel.app/", // Baad me change kar dena
       description:
-        "Business-focused website with modern UI, automation features and AI integration.",
+        "Modern dental clinic website featuring appointment booking, service showcase, testimonials, pricing section and responsive design.",
     },
   ];
 
@@ -39,7 +39,6 @@ function Portfolio() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[180px] rounded-full"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -69,7 +68,6 @@ function Portfolio() {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
           {projects.map((project, index) => (
             <motion.a
               key={index}
@@ -100,7 +98,6 @@ function Portfolio() {
             >
               {/* Image */}
               <div className="relative overflow-hidden h-72">
-
                 <img
                   src={project.image}
                   alt={project.title}
@@ -116,12 +113,10 @@ function Portfolio() {
                     {project.category}
                   </span>
                 </div>
-
               </div>
 
               {/* Content */}
               <div className="p-8">
-
                 <h3 className="text-2xl font-bold mb-4">
                   {project.title}
                 </h3>
@@ -131,22 +126,17 @@ function Portfolio() {
                 </p>
 
                 <div className="flex items-center justify-between">
-
                   <span className="text-cyan-400 font-medium">
                     View Live Website
                   </span>
 
                   <FaExternalLinkAlt className="text-cyan-400 group-hover:rotate-12 transition duration-300" />
-
                 </div>
 
-                {/* Bottom Hover Line */}
                 <div className="mt-6 h-[2px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-500"></div>
-
               </div>
             </motion.a>
           ))}
-
         </div>
 
         {/* Bottom CTA */}
@@ -164,7 +154,6 @@ function Portfolio() {
             Start Your Project Today
           </a>
         </motion.div>
-
       </div>
     </section>
   );
